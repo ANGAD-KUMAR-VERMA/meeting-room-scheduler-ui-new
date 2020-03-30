@@ -76,7 +76,7 @@
                                 <div class="form-group">
 
                                     <br>
-                                    <input [owlDateTime]="dt1" #startTime [owlDateTimeTrigger]="dt1" placeholder="Start Time">
+                                    <input [owlDateTime]="dt1" #startTime [owlDateTimeTrigger]="dt1"  placeholder="Start Time">
                                     <owl-date-time  #dt1 pickerType="timer"> </owl-date-time>
 
 
@@ -91,7 +91,7 @@
                                 <div class="form-group">
 
                                     <br>
-                                    <input  [owlDateTimeFilter]="myFilter"  [owlDateTime]="startdate" #startDate [owlDateTimeTrigger]="startdate" placeholder="Start Date">
+                                    <input  [owlDateTimeFilter]="myFilter" [(ngModel)]="minDate" [owlDateTime]="startdate"  [owlDateTimeTrigger]="startdate" placeholder="Start Date" (ngModelChange)= "changeMinDate($event)">
                                     <owl-date-time  #startdate pickerType="calendar"  > </owl-date-time>
 
                                 </div>

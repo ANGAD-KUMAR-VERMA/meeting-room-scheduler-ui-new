@@ -60,12 +60,13 @@ export class BookingPageComponent implements OnInit {
         const currentYear = new Date().getFullYear();
         const currentMonth = new Date().getMonth();
         const currentDay = new Date().getDate();
-        this.minDate = currentYear +"-"+ +"0"+ +"4" +"-"+ currentDay;
+        this.minDate = currentYear +"-"+ currentMonth +"-"+ currentDay;
 
     }
 
     ngOnInit() {
-     
+      
+     console.log(this.minDate);
         this.form = this.fb.group({
             meetingroom: [this.meetingroom, []]
         });
@@ -153,6 +154,8 @@ export class BookingPageComponent implements OnInit {
        console.log(customeBookingDates);
        console.log(this.minDate);
 
+       this.minDate = this.datePipe.transform(this.minDate, 'yyyy-MM-dd')
+      
       let bookingDetail = new Booking(roomId.value, 1001, this.startTime, this.endTime, meetingTypeId.value, 
         this.meetingMode, customeBookingDates, this.minDate);
 
@@ -221,6 +224,10 @@ export class BookingPageComponent implements OnInit {
     // Prevent Saturday and Sunday from being selected.
     return day !== 0 && day !== 6 && d >= today;
 }
+
+  
+
+  
 }
 
     
