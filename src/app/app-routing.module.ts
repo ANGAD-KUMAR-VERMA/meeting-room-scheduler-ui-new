@@ -23,8 +23,8 @@ import {BookingSchedulerComponent} from './booking-scheduler/booking-scheduler.c
 const routes: Routes = [
   //{path:"",component: LoginComponent},
   //{path:"**",component: LoginComponent},
-  //{path:"login",component: LoginComponent},
-  //{path:"register",component: RegisterComponent},
+  {path:"login",component: LoginComponent},
+  {path:"register",component: RegisterComponent},
   //{path:"booking",component: BookingComponent, canActivate: [AuthGuard]},
   {path:"booking",component: BookingComponent},
   //{path:"search-form",component: SearchFormComponent, canActivate: [AuthGuard]},

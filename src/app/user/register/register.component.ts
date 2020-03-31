@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/_service/auth.service';
@@ -20,11 +20,16 @@ export class RegisterComponent implements OnInit {
   showError: boolean;
 
 
-  constructor(private authService: AuthService,
-    private router: Router, private formBuilder: FormBuilder, private spinner: NgxSpinnerService) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router, 
+    private formBuilder: FormBuilder, 
+    private spinner: NgxSpinnerService,
+    private renderer: Renderer2) { }
 
 
   ngOnInit() {
+    this.setBodyClassForDesign();
     this.showError = false;
     var isLogged = this.authService.isAuthenticated();
     if (isLogged) {
@@ -41,6 +46,12 @@ export class RegisterComponent implements OnInit {
     }, {
       validator: this.MustMatch('password', 'confirmPassword')
     });
+  }
+
+
+  setBodyClassForDesign(): void{
+    this.renderer.addClass(document.body,"hold-transition");
+    this.renderer.addClass(document.body,"login-page");
   }
 
   get f() { return this.regForm.controls; }

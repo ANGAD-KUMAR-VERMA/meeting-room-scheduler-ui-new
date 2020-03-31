@@ -1,73 +1,84 @@
-<app-spinner></app-spinner>
-<div class="container" style="margin-top:100px">
-    <div class="col-md-10 col-md-offset-1">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><strong>Sign up </strong></h3>
-                <div style="float:right; font-size: 80%; position: relative; top:-10px">
-                </div>
-            </div>
-
-            <div class="panel-body">
-                <form role="form" id="regForm" (ngSubmit)="registerUser(register)" #register [formGroup]="regForm" autocomplete="off">
-
-                    <div class="alert alert-danger" *ngIf="showError">
-                        <a class="" data-dismiss="alert" href="#"></a>{{regErrorMsg}}
-                    </div>
-
-                    <div class="form-group">
-                        <input type="text" formControlName="fullName" placeholder="Full Name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }" />
-                            <div *ngIf="submitted && f.fullName.errors" class="invalid-feedback">
-                                <div *ngIf="f.fullName.errors.required">Full Name is required</div>
-                            </div>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" formControlName="usrEmpId" placeholder="Employee ID" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.usrEmpId.errors }" />
-                        <div *ngIf="submitted && f.usrEmpId.errors" class="invalid-feedback">
-                            <div *ngIf="f.usrEmpId.errors.required">Employee ID is required</div>
-                            <div *ngIf="f.usrEmpId.errors.pattern">Only numbers are allowed</div>
-
-                        </div>  
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-6 col-md-6">
-                            <input type="password" formControlName="password" placeholder="Password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-                            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                                <div *ngIf="f.password.errors.required">Password is required</div>
-                                <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-6">
-                            <div class="form-group">
-                                <input type="password" formControlName="confirmPassword" placeholder="Confirm Password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
-                                <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
-                                    <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
-                                    <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
-
-                                </div> 
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="input-group">
-                    </div>
-
-                    <button type="submit" class="btn btn-info btn-space">Register</button>
-                    <button type="button" class="btn btn-info btn-space" (click)="this.register.reset();">Reset</button>
-
-                    <hr style="margin-top:10px;margin-bottom:10px;">
-
-                    <div class="form-group">
-                        <div style="font-size:85%">
-                            Have an account!
-                            <a href="#" routerLink="/login">
-                                Sign In Here
-                            </a>
-                        </div>
-
-                    </div>
-                </form>
-            </div>
-        </div>
+<div class="login-box">
+    <div class="login-logo">
+      <a href="../../index2.html"><b>Project Name</b></a>
     </div>
-</div>
+    <!-- /.login-logo -->
+    <div class="card">
+      <div class="card-body login-card-body">
+        <p class="login-box-msg">Register new account</p>
+        <div class="alert alert-danger" *ngIf="showError">
+            <a class="" data-dismiss="alert" href="#"></a>{{regErrorMsg}}
+        </div>
+        <form role="form" id="regForm" (ngSubmit)="registerUser(register)" #register [formGroup]="regForm" autocomplete="off">
+          <div class="input-group mb-3 form-group">
+            <input type="text" formControlName="fullName" placeholder="Full Name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }" />
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user-circle"></span>
+              </div>
+            </div>
+            <div *ngIf="submitted && f.fullName.errors" class="invalid-feedback">
+                <div *ngIf="f.fullName.errors.required">Full Name is required</div>
+            </div>
+          </div>
+
+          <div class="input-group mb-3 form-group">
+            <input type="text" formControlName="usrEmpId" placeholder="Employee ID" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.usrEmpId.errors }" />
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-id-card"></span>
+              </div>
+            </div>
+            <div *ngIf="submitted && f.usrEmpId.errors" class="invalid-feedback">
+                <div *ngIf="f.usrEmpId.errors.required">Employee ID is required</div>
+                <div *ngIf="f.usrEmpId.errors.pattern">Only numbers are allowed</div>
+            </div>  
+          </div>
+
+
+          <div class="input-group mb-3 form-group">
+            <input type="password" formControlName="password" placeholder="Password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                <div *ngIf="f.password.errors.required">Password is required</div>
+                <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+            </div>
+          </div>
+
+          <div class="input-group mb-3 form-group">
+            <input type="password" formControlName="confirmPassword" placeholder="Confirm Password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+            <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+                <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+
+            </div> 
+          </div>
+
+          <div class="row"> 
+               <button type="button" class="btn btn-warning btn-space" (click)="this.register.reset();">Reset</button>
+
+                <button type="submit" class="btn btn-primary btn-space float-right">Register</button>
+          </div>
+        </form> 
+   
+        <p class="mb-0">
+            Have an account!
+            <a href="#" routerLink="/login">
+                Sign In Here
+            </a>
+        </p>
+      </div>
+      <!-- /.login-card-body -->
+    </div>
+  </div>
+  <!-- /.login-box -->
+  
