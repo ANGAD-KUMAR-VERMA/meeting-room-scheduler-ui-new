@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
+import {MAT_DIALOG_DATA, MatDialogRef, MatButton} from "@angular/material";
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { DatepickerDialogueComponent } from '../datepicker-dialogue/datepicker-dialogue.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -40,6 +40,8 @@ export class BookingPageComponent implements OnInit {
     bookingSuccessMsg: String;
     showSuccess: boolean;
     minDate : String;
+    noOfWeeksRequired:boolean;
+    noOfWeeks:number;
    
     
     @ViewChild('rId', { static: true }) ID: ElementRef;
@@ -66,7 +68,7 @@ export class BookingPageComponent implements OnInit {
 
     ngOnInit() {
       
-     console.log(this.minDate);
+     console.log("ngOninint"+this.minDate);
         this.form = this.fb.group({
             meetingroom: [this.meetingroom, []]
         });
@@ -132,11 +134,22 @@ export class BookingPageComponent implements OnInit {
         }else{
           this.enableStartDate = false;
         }
+
+        if(mrButton.value === "week"){
+          this.enableStartDate = true;
+          this.noOfWeeksRequired=true;
+        }else{
+           this.noOfWeeksRequired=false;
+        }
      } 
 
+    
 
-     bookRoom(roomId: any, meetingTypeId: any, startTimeInput: any, endTimeInput: any) {
-        console.log(roomId.value);
+     bookRoom(roomId: any, meetingTypeId: any, startTimeInput: any, endTimeInput: any,noOfWeeks:any) {
+      console.log("No Of Weeks"+noOfWeeks);
+        
+      console.log(roomId.value);
+
         console.log(meetingTypeId.value);
         console.log(this.meetingMode);
         console.log(startTimeInput.value);
@@ -157,7 +170,7 @@ export class BookingPageComponent implements OnInit {
        this.minDate = this.datePipe.transform(this.minDate, 'yyyy-MM-dd')
       
       let bookingDetail = new Booking(roomId.value, 1001, this.startTime, this.endTime, meetingTypeId.value, 
-        this.meetingMode, customeBookingDates, this.minDate);
+        this.meetingMode, customeBookingDates, this.minDate,noOfWeeks);
 
       this.spinner.show();
       this.errorMsg = "";

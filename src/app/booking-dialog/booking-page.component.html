@@ -87,15 +87,28 @@
                                 </div>
                             </div>
 
-                            <div *ngIf="enableStartDate" class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="form-group">
+                            <div class="row">
 
-                                    <br>
-                                    <input  [owlDateTimeFilter]="myFilter" [(ngModel)]="minDate" [owlDateTime]="startdate"  [owlDateTimeTrigger]="startdate" placeholder="Start Date" (ngModelChange)= "changeMinDate($event)">
-                                    <owl-date-time  #startdate pickerType="calendar"  > </owl-date-time>
+                                <div *ngIf="enableStartDate" class="col-xs-12 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        
+                                        
+                                        <input  [owlDateTimeFilter]="myFilter" [(ngModel)]="minDate" [owlDateTime]="startdate"  [owlDateTimeTrigger]="startdate" placeholder="Start Date" (ngModelChange)= "changeMinDate($event)">
+                                        <owl-date-time  #startdate pickerType="calendar"  > </owl-date-time>
+                                        
+                                    </div>
+                            </div>
 
                                 </div>
-                            </div>
+
+    
+                                
+                                <div *ngIf="noOfWeeksRequired" class="col-xs-12 col-sm-6 col-md-6" >
+                                    <div class="form-group">
+                                        <input type="number" name="noOfWeeks" [(ngModel)]="noOfWeeks" placeholder="No Of Weeks">
+                                    </div>
+                                </div>
+
 
                             <div *ngIf="isrequired">
                                 <mat-form-field style="width: 100%;" appearance="outline">
@@ -117,11 +130,13 @@
                         </div>
 
                         <button type="submit" class="btn btn-info btn-space"
-                            (click)="bookRoom(rId, meetingTypeId, startTime, endTime)">Book</button>
+                            (click)="bookRoom(rId, meetingTypeId, startTime, endTime,noOfWeeks)">Book</button>
 
                         <button type="button" class="btn btn-info btn-space" (click)="reset()">Reset</button> 
 
                         <button type="button" class="btn btn-info btn-space" (click)="close()">Close</button> 
+                       
+                        
 
  </div>
  </div> 

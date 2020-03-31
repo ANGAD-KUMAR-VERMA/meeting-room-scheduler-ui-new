@@ -11,15 +11,18 @@ export class Booking {
     bookingMode:String;
     customBookingDate : String[];
     bookingStartDate : String;
+
     
     //constructor(){}
 
     bookingId?:number;
     roomName?:string;
+    noOfWeeks?:number;
 
     constructor(roomId: number, usrEmpId: number,
         bookingStartTime: String,bookingEndTime: String, meetingTypeId : number, 
-        bookingMode: String, customBookingDate : String[], bookingStartDate : String) {
+        bookingMode: String, customBookingDate : String[], bookingStartDate : String,
+        noOfWeeks:number) {
         this.roomId = roomId;
         this.usrEmpId = usrEmpId;
         this.meetingTypeId = meetingTypeId;
@@ -28,5 +31,6 @@ export class Booking {
         this.bookingMode = bookingMode;
         this.customBookingDate = customBookingDate;
         this.bookingStartDate = bookingStartDate;
+        this.noOfWeeks=noOfWeeks;
      } 
     }
