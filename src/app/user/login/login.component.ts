@@ -1,5 +1,5 @@
 
-import { Component, OnInit, ɵConsole, OnDestroy } from '@angular/core';
+import { Component, OnInit, ɵConsole, OnDestroy, Renderer2 } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/_service/auth.service';
@@ -27,13 +27,14 @@ export class LoginComponent implements OnInit {
   subscription: Subscription;
   loginForm: FormGroup;
 
-  constructor(private authService: AuthService,
+  constructor(private authService: AuthService,private renderer: Renderer2,
     private router: Router, private formBuilder: FormBuilder,private spinner: NgxSpinnerService) {
     this.getCustomMessage();
 
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
+    this.setBodyClassForDesign();
     this.loginForm = this.formBuilder.group({
       Username: ['', Validators.required],
       Password: ['', [Validators.required]]
@@ -45,6 +46,11 @@ export class LoginComponent implements OnInit {
     }
   }
 
+
+  setBodyClassForDesign(): void{ 
+    this.renderer.addClass(document.body,"hold-transition");
+    this.renderer.addClass(document.body,"login-page");
+  }
 
   getCustomMessage() {
     if (this.authService.showMessage) {

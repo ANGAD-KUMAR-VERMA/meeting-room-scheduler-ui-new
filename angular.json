@@ -31,9 +31,17 @@
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "./node_modules/jqwidgets-ng/jqwidgets/styles/jqx.base.css",
-               "./node_modules/ng-pick-datetime/assets/style/picker.min.css"
+              "./node_modules/ng-pick-datetime/assets/style/picker.min.css",
+
+              "src/plugins/fontawesome-free/css/all.min.css",
+              "src/dist/css/adminlte.min.css",
+              "src/plugins/icheck-bootstrap/icheck-bootstrap.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/plugins/jquery/jquery.min.js",
+              "src/plugins/bootstrap/js/bootstrap.bundle.min.js",
+              "src/dist/js/adminlte.min.js"
+            ]
           },
           "configurations": {
             "production": {
