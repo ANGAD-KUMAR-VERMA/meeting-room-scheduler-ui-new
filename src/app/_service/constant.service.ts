@@ -25,6 +25,8 @@ export class ConstantService {
   bookRoom = '/meetingroom/book';
   cancelRoom = '/meetingroom/cancel';
   searchRoom = '/meetingroom/search';
+  allmeetingdetails = '/meetingroom/getAllmeetingdetails';
+  meetingdetails = '/meetingroom/getmeetingdetails';
 
   fetchRooms = '/room/fetchrooms';
 

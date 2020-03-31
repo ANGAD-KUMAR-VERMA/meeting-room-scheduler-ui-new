@@ -13,6 +13,8 @@ import { Subscription } from 'rxjs';
 import { Room } from 'src/app/_model/room.model';
 import { MeetingType } from 'src/app/_model/meetingtype.model';
 import { RoomService } from 'src/app/_service/room.service';
+import { SearchService } from 'src/app/_service/search.service';
+import { MeetingRoomDetail } from 'src/app/_model/meetingroomdetail.model';
 
 @Component({
   selector: 'app-booking-page',
@@ -48,6 +50,7 @@ export class BookingPageComponent implements OnInit {
   enableStartDate: boolean;
     constructor(
         private service: BookingService,
+        private searchService : SearchService,
         private roomService: RoomService,
         private spinner: NgxSpinnerService,
         private fb: FormBuilder,
@@ -165,7 +168,7 @@ export class BookingPageComponent implements OnInit {
        this.dateString = this.dateString.substr(0, this.dateString.length - 2);
        var customeBookingDates = this.dateString.split(","); 
        console.log(customeBookingDates);
-       console.log(this.minDate);
+       //console.log(this.minDate);
 
        this.minDate = this.datePipe.transform(this.minDate, 'yyyy-MM-dd')
       
@@ -192,10 +195,22 @@ export class BookingPageComponent implements OnInit {
     
           this.successMsg = this.bookingSuccessMsg;
           alert("Booked Successfully !!!");
+
+          this.searchService.getMeetingRoomDetails(bookingDetail).subscribe(data => {
+            this.handleFetchData(data)    
+        });
          
           setTimeout(() => {
             this.showSuccess = false; this.successMsg = "";
           }, 2500);
+        }
+      }
+
+      handleFetchData(data: MeetingRoomDetail[]) {
+        if (data.length > 0) {
+          this.searchService.changeMessage(data);
+        } else {
+          this.searchService.changeMessage([]);
         }
       }
     
