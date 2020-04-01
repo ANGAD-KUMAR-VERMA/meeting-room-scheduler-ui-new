@@ -3,8 +3,8 @@
     <!-- <app-left-navigation></app-left-navigation> -->
 <!-- </div> -->
 
-<app-top-navigation  *ngIf="router.url != '/login' &&  router.url != '/register' && router.url == '/'"></app-top-navigation>
-<app-navbar *ngIf="router.url != '/login' &&  router.url != '/register' &&  router.url != '/'"></app-navbar>
+<app-top-navigation  *ngIf="router.url != '/login' &&  router.url != '/register' && router.url == '/booking-scheduler'"></app-top-navigation>
+<app-navbar *ngIf="router.url == '/login' ||  router.url == '/register'"></app-navbar>
 
 
 <!-- <app-navbar></app-navbar> -->
