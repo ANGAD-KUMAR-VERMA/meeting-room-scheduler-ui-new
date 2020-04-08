@@ -1,149 +1,159 @@
- <app-spinner></app-spinner>
+<app-spinner></app-spinner>
 
-    <div class="row">
-        <div class="container register-form border border-info" style="margin-top:30px"><br>
-            <div class="alert alert-danger" *ngIf="errorMsg">
-                <a class="close" data-dismiss="alert" href="#"></a>{{errorMsg}}
+<div class="row">
+    <div class="container register-form border border-info" style="margin-top:30px"><br>
+        <div class="alert alert-danger" *ngIf="errorMsg">
+            <a class="close" data-dismiss="alert" href="#"></a>{{errorMsg}}
+        </div>
+
+        <div class="alert alert-success" *ngIf="successMsg">
+            <a class="close" data-dismiss="alert" href="#"></a>{{successMsg}}
+        </div>
+
+        <div class="panel panel-default ">
+
+            <div class="panel-heading">
+                <div style="float:right; font-size: 80%; position: relative; top:-10px">
+                </div>
             </div>
 
-            <div class="alert alert-success" *ngIf="successMsg">
-                <a class="close" data-dismiss="alert" href="#"></a>{{successMsg}}
+            <div class="panel-heading">
+                <h3 class="panel-title"><strong>Create Schedule </strong></h3>
+                <hr>
+                <div style="float:right; font-size: 80%; position: relative; top:-10px">
+                </div>
             </div>
-           
-            <div class="panel panel-default ">
 
-                <div class="panel-heading">
-                    <div style="float:right; font-size: 80%; position: relative; top:-10px">
-                    </div>
-                </div>
+            <div class="panel-body">
 
-                <div class="panel-heading">
-                    <h3 class="panel-title"><strong>Create Schedule </strong></h3>
-                    <hr>
-                    <div style="float:right; font-size: 80%; position: relative; top:-10px">
-                    </div>
-                </div>
+                <div role="form" id="quickForm" class="form" aria-autocomplete="none">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-12">
 
-                <div class="panel-body">
+                            <div class="form-group">
 
-                    <div role="form" id="quickForm" class="form" aria-autocomplete="none">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <span class="text-danger"><strong>* </strong></span>
+                                <select #rId class="form-control drop" id="sel1">
+                                    <option value="0">--All--</option>
+                                    <option *ngFor="let room of roomList" value={{room.id}}>
+                                        {{room.roomName}}
 
-                                <div class="form-group">
-
-                                    <span class="text-danger"><strong>* </strong></span>
-                                    <select #rId class="form-control drop" id="sel1">
-                                        <option value="0">--All--</option>
-                                        <option *ngFor="let room of roomList" value={{room.id}}>
-                                            {{room.roomName}}
-                                            
-                                        </option>
-                                    </select>
-                                </div>
+                                    </option>
+                                </select>
                             </div>
-                            <div class="col-xs-12 col-sm-6 col-md-6">
-
-                                <div class="form-group">
-
-                                    <span class="text-danger"><strong>* </strong></span>
-                                    <select #meetingTypeId class="form-control drop" id="sel2">
-                                        <option value="0">--All--</option>
-                                     
-                                        <option *ngFor="let meetingType of meetingTypeList" value={{meetingType.purposeId}}>
-                                            {{meetingType.purpose}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="form-group">
-
-                                    <br>
-                                    <mat-radio-group #comboOption aria-label="Select an option" (change)="onChange($event)">
-                                        <mat-radio-button value="today">Today</mat-radio-button>&nbsp;&nbsp;
-                                        <mat-radio-button value="tomorrow">Tomorrow</mat-radio-button>&nbsp;&nbsp;
-                                        <mat-radio-button value="week">Weekly</mat-radio-button>&nbsp;&nbsp;
-                                        <mat-radio-button value="month">Monthly</mat-radio-button>&nbsp;&nbsp;
-                                        <mat-radio-button value="custom">Custom</mat-radio-button>&nbsp;&nbsp;
-
-                                    </mat-radio-group>
-                                </div>
-                            </div>
-
-                            <div class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="form-group">
-
-                                    <br>
-                                    <input [owlDateTime]="dt1" #startTime [owlDateTimeTrigger]="dt1"  placeholder="Start Time">
-                                    <owl-date-time  #dt1 pickerType="timer"> </owl-date-time>
-
-
-                                    <input [owlDateTime]="dt2" #endTime [owlDateTimeTrigger]="dt2" placeholder="End Time">
-                                    <owl-date-time #dt2 pickerType="timer"> </owl-date-time>
-
-
-                                </div>
-                            </div>
-
-                            <div class="row">
-
-                                <div *ngIf="enableStartDate" class="col-xs-12 col-sm-6 col-md-6">
-                                    <div class="form-group">
-                                        
-                                        
-                                        <input  [owlDateTimeFilter]="myFilter" [(ngModel)]="minDate" [owlDateTime]="startdate"  [owlDateTimeTrigger]="startdate" placeholder="Start Date" (ngModelChange)= "changeMinDate($event)">
-                                        <owl-date-time  #startdate pickerType="calendar"  > </owl-date-time>
-                                        
-                                    </div>
-                            </div>
-
-                                </div>
-
-    
-                                
-                                <div *ngIf="noOfWeeksRequired" class="col-xs-12 col-sm-6 col-md-6" >
-                                    <div class="form-group">
-                                        <input type="number" name="noOfWeeks" [(ngModel)]="noOfWeeks" placeholder="No Of Weeks">
-                                    </div>
-                                </div>
-
-
-                            <div *ngIf="isrequired">
-                                <mat-form-field style="width: 100%;" appearance="outline">
-                                    <mat-label>Pick date/dates</mat-label>
-                                    <textarea [(ngModel)]="dateString" matInput cdkTextareaAutosize
-                                        #autosize="cdkTextareaAutosize" readonly cdkAutosizeMinRows="1"
-                                        cdkAutosizeMaxRows="5"></textarea>
-                                    <mat-icon matSuffix (click)="openDatepicker()" style="cursor: pointer;">
-                                        calendar_today</mat-icon>
-                                </mat-form-field>
-                            </div>            
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-12">
 
+                            <div class="form-group">
+
+                                <span class="text-danger"><strong>* </strong></span>
+                                <select #meetingTypeId class="form-control drop" id="sel2">
+                                    <option value="0">--All--</option>
+
+                                    <option *ngFor="let meetingType of meetingTypeList" value={{meetingType.purposeId}}>
+                                        {{meetingType.purpose}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-12">
                         <div class="form-group">
-                            <span class="text-danger"><strong>*</strong> </span> mandatory for Book
+
+                            <mat-radio-group #comboOption aria-label="Select an option" (change)="onChange($event)">
+                                <mat-radio-button value="today">Today</mat-radio-button>&nbsp;&nbsp;
+                                <mat-radio-button value="tomorrow">Tomorrow</mat-radio-button>&nbsp;&nbsp;
+                                <mat-radio-button value="week">Weekly</mat-radio-button>&nbsp;&nbsp;
+                                <mat-radio-button value="month">Monthly</mat-radio-button>&nbsp;&nbsp;
+                                <mat-radio-button value="custom">Custom</mat-radio-button>&nbsp;&nbsp;
+
+                            </mat-radio-group>
                         </div>
- 
-                        <div class="input-group">
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6 col-md-12">
+                        <div class="form-group">
+                            <div class="row">
+                            <div class="col-md-6">
+                            <input [owlDateTime]="dt1" #startTime [owlDateTimeTrigger]="dt1" placeholder="Start Time">
+                            <owl-date-time #dt1 pickerType="timer"> </owl-date-time>
+</div>
+<div class="col-md-6">
+
+
+                            <input [owlDateTime]="dt2" #endTime [owlDateTimeTrigger]="dt2" placeholder="End Time">
+                            <owl-date-time #dt2 pickerType="timer"> </owl-date-time>
+
+</div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div *ngIf="enableStartDate" class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+
+
+                                <input [owlDateTimeFilter]="myFilter" [(ngModel)]="minDate" [owlDateTime]="startdate"
+                                    [owlDateTimeTrigger]="startdate" placeholder="Start Date"
+                                    (ngModelChange)="changeMinDate($event)">&nbsp;
+                                <owl-date-time #startdate pickerType="calendar"> </owl-date-time>
+
+                            </div>
                         </div>
 
-                        <button type="submit" class="btn btn-info btn-space"
-                            (click)="bookRoom(rId, meetingTypeId, startTime, endTime,noOfWeeks)">Book</button>
 
-                        <button type="button" class="btn btn-info btn-space" (click)="reset()">Reset</button> 
 
-                        <button type="button" class="btn btn-info btn-space" (click)="close()">Close</button> 
-                       
-                        
 
- </div>
- </div> 
- </div> 
-                   
- 
-                <!--     <h2 mat-dialog-title>Create Scchedule</h2>
+                    <div *ngIf="noOfWeeksRequired" class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <input type="number" name="noOfWeeks" [(ngModel)]="noOfWeeks" placeholder="No Of Weeks">
+                        </div>
+                    </div>
+
+
+                    <div *ngIf="isrequired" class="col-xs-12 col-sm-6 col-md-12">
+                        <mat-form-field style="width: 100%;" appearance="outline">
+                            <mat-label>Pick date/dates</mat-label>
+                            <textarea [(ngModel)]="dateString" matInput cdkTextareaAutosize
+                                #autosize="cdkTextareaAutosize" readonly cdkAutosizeMinRows="1"
+                                cdkAutosizeMaxRows="5"></textarea>
+                            <mat-icon matSuffix (click)="openDatepicker()" style="cursor: pointer;">
+                                calendar_today</mat-icon>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <span class="text-danger"><strong>*</strong> </span> mandatory for Book
+                </div>
+
+                <div class="input-group">
+                </div>
+<div class="row">
+    <div class="col-md-2">
+</div>
+    <div class="col-md-3">
+                <button type="submit" class="btn btn-info btn-space"
+                    (click)="bookRoom(rId, meetingTypeId, startTime, endTime,noOfWeeks)">Book</button>
+</div>
+<div class="col-md-3">
+                <button type="button" class="btn btn-info btn-space" (click)="reset()">Reset</button>
+</div>
+<div class="col-md-3">
+                <button type="button" class="btn btn-info btn-space" (click)="close()">Close</button>
+            </div></div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <!--     <h2 mat-dialog-title>Create Scchedule</h2>
 
 <mat-dialog-content [formGroup]="form">
 
@@ -220,4 +230,3 @@
     <button class="mat-raised-button"(click)="close()">Close</button>
     <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
 </mat-dialog-actions> -->
- 
